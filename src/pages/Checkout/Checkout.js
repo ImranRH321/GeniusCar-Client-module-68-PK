@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const Checkout = () => {
   const { serviceId } = useParams();
   const [service] = useServiceDetail(serviceId);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
 
 
@@ -31,6 +31,7 @@ const Checkout = () => {
           toast('you are book')
         }
       })
+      event.target.reset()
   }
 
   return (

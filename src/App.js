@@ -15,6 +15,7 @@ import AddService from "./pages/AddService/AddService";
 import ManegService from "./pages/ManegService/ManegService";
 import { ToastContainer, toast } from 'react-toastify';
 import SocialLogin from "./pages/Login/SocialLogin/SocialLogin";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
+        <Route path="/orders" element={<Orders></Orders>}></Route>
         <Route
           path="/checkout/:serviceId"
           element={
