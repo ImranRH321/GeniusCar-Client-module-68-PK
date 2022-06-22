@@ -11,6 +11,7 @@ import Loading from "../../../Shared/Loading/Loading";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import PageTitle from "../../../Shared/PageTitle/PageTitle";
+import axios from "axios";
 
 const Login = () => {
   const emailRef = useRef("");
@@ -37,16 +38,33 @@ const Login = () => {
   }
 
   if (user) {
-    console.log(user);
-    navigate(from, { replace: true });
+    // navigate(from, { replace: true });
   }
 
-  const handleLogin = event => {
+  /* form submit  */
+  const handleFormSubmitUser = async event => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    // console.log(email, password);
-    signInWithEmailAndPassword(email, password);
+    await signInWithEmailAndPassword(email, password);
+    /* 
+     // const {data} = await axios.post('http://localhost:5000/login', {email})
+    //  console.log(data,'data');
+
+ */
+    const url = `http://localhost:5000/login`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        localStorage.setItem('accessToken', data.accessToken) 
+        navigate(from, { replace: true });
+      });
   };
 
   // forget reset send user
@@ -64,7 +82,7 @@ const Login = () => {
     <div className="container mx-auto w-50 border p-5">
       <PageTitle title="login"></PageTitle>
       <h2 className="text-primary text-center">Login Page</h2>
-      <Form onSubmit={handleLogin}>
+      <Form onSubmit={handleFormSubmitUser}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
         </Form.Group>
