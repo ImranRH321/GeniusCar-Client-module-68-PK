@@ -9,6 +9,8 @@ import auth from "../../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import Loading from "../../../Shared/Loading/Loading";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
+import PageTitle from "../../../Shared/PageTitle/PageTitle";
 
 const Login = () => {
   const emailRef = useRef("");
@@ -16,9 +18,9 @@ const Login = () => {
   const navigate = useNavigate();
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  const location = useLocation();
   const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
 
+  const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   let errorElement;
@@ -60,6 +62,7 @@ const Login = () => {
 
   return (
     <div className="container mx-auto w-50 border p-5">
+      <PageTitle title="login"></PageTitle>
       <h2 className="text-primary text-center">Login Page</h2>
       <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="formBasicEmail">

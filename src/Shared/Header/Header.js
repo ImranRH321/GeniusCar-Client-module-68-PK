@@ -27,6 +27,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
+              <Nav.Link href="home">Home</Nav.Link>
               <Nav.Link href="home#service">Service</Nav.Link>
               <Nav.Link href="home#expert">Experts</Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
@@ -47,6 +48,16 @@ const Header = () => {
               <Nav.Link as={Link} to="/about">
                 About
               </Nav.Link>
+              {user && (
+                <>
+                  <Nav.Link as={Link} to="/add/service">
+                    AddService
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/maneg/service">
+                    Manges Service
+                  </Nav.Link>
+                </>
+              )}
               {user ? (
                 <button onClick={logOut} class="btn btn-danger">
                   SignOut
